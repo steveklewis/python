@@ -7,4 +7,4 @@ class MoviesBinder(Binder):
     def __init__(self):
         super(MoviesBinder, self).__init__("movies-binder")
         self.bind(MovieLister).init(MovieFinder)
-        self.bind(MovieFinder, to=CSVMovieFinder).init("movies.csv")
+        self.bind(MovieFinder, to=CSVMovieFinder, strategy="singleton").init("movies.csv")
