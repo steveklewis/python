@@ -11,4 +11,4 @@ Hexagonal Django
   <li><a href="http://www.slideshare.net/mvschaik/hexagonal">Hexagonal Design in Django</a></li>
 </ul>
 
-* [October CincyRb - Jim Weirich on Decoupling from Rails] (https://www.youtube.com/watch?v=tg5RFeSfBM4)
+* [October CincyRb - Jim Weirich on Decoupling from Rails (video)] (https://www.youtube.com/watch?v=tg5RFeSfBM4)
