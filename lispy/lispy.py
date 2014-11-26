@@ -66,6 +66,22 @@ def atom(token):
         except ValueError:
             return Symbol(token)
 
+def schemestr(exp):
+    "Convert a python object back into a Scheme-readable string."
+    if isinstance(exp, list):
+        return '(' + ' '.join(map(schemestr, exp)) + ')'
+    else:
+        return str(exp)
+
+def repl(prompt='lis.py> '):
+    "A prompt-read-eval-print loop."
+    while True:
+        val = eval(parse(raw_input(prompt)))
+        if val is not None:
+            print(schemestr(val))
+
+
+
 def read_from_tokens(tokens):
     "Read an expression from a sequence of tokens."
     if len(tokens) == 0:
@@ -99,5 +115,7 @@ program = "(begin (define r 10) (* pi (* r r)))"
 #print eval(parse(program))
 
 ## Set up the environment for r
-eval(parse("(define r 10)"))
-print eval(parse("(* pi (* r r))"))
+#eval(parse("(define r 10)"))
+#print eval(parse("(* pi (* r r))"))
+
+repl()
