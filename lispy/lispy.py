@@ -1,7 +1,23 @@
-Env = dict
 Symbol = str
 List = list
 Number = (int, float)
+
+class Env(dict):
+    "An environment: a dict of {'var':val} pairs, with an outer Env."
+    def __init__(self, parms=(), args=(), outer=None):
+        self.update(zip(parms, args))
+        self.outer = outer
+    def find(self, var):
+        "Find the innermost Env where var appears."
+        return self if (var in self) else self.outer.find(var)
+
+
+class Procedure(object):
+    "A user-defined Scheme procedure."
+    def __init__(self, parms, body, env):
+        self.parms, self.body, self.env = parms, body, env
+    def __call__(self, *args):
+        return eval(self.body, Env(self.parms, args, self.env))
 
 def standard_env():
     "An environment with some Scheme standard procedures."
@@ -40,7 +56,7 @@ global_env = standard_env()
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
     if isinstance(x, Symbol):
-        return env[x]
+        return env.find(x)[x]
     elif not isinstance(x, List):
         return x
     elif x[0] == 'quote':
@@ -53,8 +69,15 @@ def eval(x, env=global_env):
     elif x[0] == 'define':
         (_, var, exp) = x
         env[var] = eval(exp, env)
+    elif x[0] == 'set!':
+        (_, var, exp) = x
+        env.find(var)[var] = eval(exp, env)
+    elif x[0] == 'lambda':
+        (_, parms, body) = x
+        return Procedure(parms, body, env)
     else:
         proc = eval(x[0], env)
+        print "call proc %s" % proc
         args = [eval(arg, env) for arg in x[1:]]
         return proc(*args)
 
