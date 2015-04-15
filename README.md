@@ -14,3 +14,10 @@ Hexagonal Django
 
 * [October CincyRb - Jim Weirich on Decoupling from Rails (video)] (https://www.youtube.com/watch?v=tg5RFeSfBM4)
 
+Packaging & Deploying Python
+============================
+
+
+<ul>
+  <li>[Python Deployment Anti-Patterns] (https://hynek.me/articles/python-deployment-anti-patterns/)</li>
+</ul>
