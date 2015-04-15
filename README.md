@@ -17,7 +17,5 @@ Hexagonal Django
 Packaging & Deploying Python
 ============================
 
+* [Python Deployment Anti-Patterns] (https://hynek.me/articles/python-deployment-anti-patterns/)
 
-<ul>
-  <li>[Python Deployment Anti-Patterns] (https://hynek.me/articles/python-deployment-anti-patterns/)</li>
-</ul>
