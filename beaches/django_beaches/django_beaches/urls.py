@@ -4,20 +4,32 @@ from django.contrib import admin
 
 from rest_framework import routers, serializers, viewsets
 
+from beaches_app.models import Beach
+
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url','username','email','is_staff')
 
+class BeachSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Beach
+        fields = ('name', 'score')
+
 # ViewSets define the view behavior
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class BeachViewSet(viewsets.ModelViewSet):
+    queryset = Beach.objects.all()
+    serializer_class = BeachSerializer
+
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'beaches', BeachViewSet)
 
 urlpatterns = [
     # Examples:
